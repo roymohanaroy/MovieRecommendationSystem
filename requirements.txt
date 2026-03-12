@@ -1,0 +1,9 @@
+langchain>=1.0.0
+openai
+langgraph
+langchain-openai
+fastapi
+uvicorn
+pypdf
+python-dotenv
+pytest
