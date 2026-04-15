@@ -17,3 +17,7 @@ def recommend_movies(query: Query):
     result = graph.invoke(state)
     
     return result
+
+@app.get("/")
+def home():
+    return {"status": "running"}

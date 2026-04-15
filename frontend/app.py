@@ -6,7 +6,6 @@ st.title("AI Movie Recommender")
 query = st.text_input("What kind of movie do you want?")
 
 if st.button("Recommend"):
-    print("----------inside------------")
     response = requests.post(
         "http://localhost:8000/recommend",
         json={"user_query": query}

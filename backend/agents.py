@@ -14,8 +14,7 @@ def intent_agent(state):
 
     prompt = f"""
     Return  only the movie genre from the user's query."{state['user_query']}"
-    
-    
+        
     """
 
     response = llm.invoke([HumanMessage(content=prompt)])
@@ -37,7 +36,7 @@ def search_agent(state):
     results = movies[
         movies["genre"].str.contains(intent)
     ]["title"].tolist()   
-    print("--------resukts-----",results)
+    print("--------results-----",results)
    
     return {"movies": results}
 

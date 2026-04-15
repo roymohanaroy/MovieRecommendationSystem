@@ -7,3 +7,6 @@ uvicorn
 pypdf
 python-dotenv
 pytest
+gunicorn
+pandas
+streamlit
