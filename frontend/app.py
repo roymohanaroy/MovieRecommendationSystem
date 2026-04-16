@@ -1,23 +1,22 @@
-import streamlit as st
-import requests
+response = requests.post(
+    "https://movierecommendationsystem-l3vs.onrender.com/recommend",
+    json={"user_query": query}
+)
 
-st.title("AI Movie Recommender")
+if response.status_code != 200:
+    st.error(f"Error: {response.status_code}")
+    st.text(response.text)
+else:
+    try:
+        data = response.json()
 
-query = st.text_input("What kind of movie do you want?")
+        st.subheader("Recommended Movies")
+        for movie in data.get("recommendations", []):
+            st.write(movie)
 
-if st.button("Recommend"):
-    response = requests.post(
-       # "http://localhost:8000/recommend",
-        "https://movierecommendationsystem-l3vs.onrender.com/recommend",
-        json={"user_query": query}
-    )
+        st.subheader("Why these movies?")
+        st.write(data.get("explanation", "No explanation provided"))
 
-    data = response.json()
-
-    st.subheader("Recommended Movies")
-
-    for movie in data["recommendations"]:
-        st.write(movie)
-
-    st.subheader("Why these movies?")
-    st.write(data["explanation"])
+    except Exception:
+        st.error("Invalid JSON response")
+        st.text(response.text)
