@@ -7,17 +7,22 @@ query = st.text_input("What kind of movie do you want?")
 
 if st.button("Recommend"):
     response = requests.post(
-       # "http://localhost:8000/recommend",
-        "https://movierecommendationsystem-l3vs.onrender.com/recommend",
-        json={"user_query": query}
-    )
+    "https://movierecommendationsystem-l3vs.onrender.com/recommend",
+    json={"user_query": query}
+)
 
-    data = response.json()
+    st.write("Status Code:", response.status_code)
+    st.write("Response Text:", response.text)
 
-    st.subheader("Recommended Movies")
+    # Only parse JSON if valid
+    if response.headers.get("content-type", "").startswith("application/json"):
+        data = response.json()
 
-    for movie in data["recommendations"]:
-        st.write(movie)
+        st.subheader("Recommended Movies")
+        for movie in data.get("recommendations", []):
+            st.write(movie)
 
-    st.subheader("Why these movies?")
-    st.write(data["explanation"])
+        st.subheader("Why these movies?")
+        st.write(data.get("explanation", "No explanation provided"))
+    else:
+        st.error("Backend did NOT return JSON")
