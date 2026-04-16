@@ -7,7 +7,7 @@ query = st.text_input("What kind of movie do you want?")
 
 if st.button("Recommend"):
     response = requests.post(
-    "https://movierecommendationsystem-l3vs.onrender.com/recommend",
+    "https://movierecommendationsystem-backend.onrender.com/recommend",
     json={"user_query": query}
 )
 
