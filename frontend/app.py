@@ -11,9 +11,6 @@ if st.button("Recommend"):
     json={"user_query": query}
 )
 
-    st.write("Status Code:", response.status_code)
-    st.write("Response Text:", response.text)
-
     # Only parse JSON if valid
     if response.headers.get("content-type", "").startswith("application/json"):
         data = response.json()
