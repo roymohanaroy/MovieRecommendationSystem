@@ -24,7 +24,7 @@ def recommend_movies(query: Query):
     state = {"user_query": query.user_query}
 
     result = graph.invoke(state)
-    
+    print(result)
     return result
 
 @app.get("/")
