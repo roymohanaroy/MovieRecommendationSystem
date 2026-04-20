@@ -5,13 +5,6 @@ from fastapi.middleware.cors import CORSMiddleware
 
 
 app = FastAPI()
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # or your Streamlit URL
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 class Query(BaseModel):
     user_query: str
